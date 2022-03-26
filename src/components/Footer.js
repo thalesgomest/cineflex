@@ -22,7 +22,7 @@ function Footer({title, posterURL, sessionData}) {
 
 export default Footer;
 
-const Rodape = styled.div`
+const Rodape = styled.footer`
     background: #DFE6ED;
     border: 1px solid #9EADBA;
     height: 117px;

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 
 import Footer from './Footer';
+import Seat from './Seat';
 
 import Loading from './../assets/loading.gif'
 
@@ -30,6 +31,7 @@ function Seats() {
             <SeatsScreen>
                     <h1>Selecione o(s) assento(s)</h1>
                     <div className="seats">
+                        {seats.seats.map((seat) => <Seat key={seat.id} number={seat.name} available={seat.isAvailable}/>)}
                     </div>
                     <div className="legend">
                         <div className="legend__marker">
@@ -45,6 +47,17 @@ function Seats() {
                             <p>Indisponível</p>
                         </div>         
                     </div>
+                    <Form >
+                        <div className="container">
+                            <label>Nome do comprador:<input type="text" placeholder="Digite seu nome..." required></input></label>
+                        </div>
+                        <div className="container">
+                        <label>CPF do comprador:<input type="text" placeholder="Digite seu CPF..." required></input></label>
+                        </div>
+                        <div className="submit">
+                            <input type="submit" value="Reservar assento(s)"></input>
+                        </div>
+                    </Form>
             </SeatsScreen>
             <Footer posterURL={seats.movie.posterURL} title={seats.movie.title} sessionData={{weekday: seats.day.weekday, time: seats.name}} />
         </>
@@ -57,7 +70,8 @@ function Seats() {
 export default Seats;
 
 const SeatsScreen = styled.div`
-        h1 {
+
+    h1 {
         font-family: 'Roboto';
         font-style: normal;
         font-weight: 400;
@@ -69,12 +83,16 @@ const SeatsScreen = styled.div`
         margin-bottom: 22px;
     }
 
-
-    .circle {
-
+    .seats {
+        display: flex;
+        flex-wrap: wrap;
+        width: 327px;
+        height:203px;
+        margin: 0 auto;
     }
 
     .legend {
+        margin-top: 16px;
         display: flex;
         justify-content: space-evenly;
     }
@@ -83,6 +101,29 @@ const SeatsScreen = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    .circle {
+        width: 26px;
+        height: 26px;
+        border: 1px solid #808F9D;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 7px;
+        margin-bottom: 18px;
+    }
+
+    .circle:nth-child(10n) {
+        margin-right: 0px;
+    }
+
+    .circle p {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 11px;
     }
 
     .circle__selected {
@@ -112,6 +153,71 @@ const SeatsScreen = styled.div`
         margin-bottom: 7px;
     }
 
+    label,input[type=text] {
+        display: block;
+    }
+
+    .container {
+        display: flex;
+        justify-content:center;
+    }
+
+    label {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+    }
+
+    .container:first-child {
+        margin-top: 48px;
+    }
+    
+    input[type=text] {
+        width: 327px;
+        height: 51px;    
+        background: #FFFFFF;
+        border: 1px solid #D5D5D5;
+        border-radius: 3px;
+        margin-top: 6px;
+        padding-left: 18px;
+    }
+
+    input[type=text]:first-child {
+        margin-bottom: 7px;
+    }
+
+    input::placeholder {
+        font-family: 'Roboto';
+        font-style: italic;
+        font-weight: 400;
+        font-size: 18px;
+        color: #AFAFAF;
+    }
+    
+
+    .submit {
+        text-align: center;
+    }
+
+    input[type=submit] {
+        width: 225px;
+        height: 42px;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        color: #FFFFFF;
+        background: rgba(232, 131, 58, 1);
+        border-radius: 3px;
+        border: none;
+        margin-top: 24px;
+        margin-bottom: 147px; 
+        cursor: pointer;
+    }
+`;
+
+const Form = styled.form`
 
 `
 
