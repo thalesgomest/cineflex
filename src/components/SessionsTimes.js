@@ -14,6 +14,7 @@ function SessionsTimes() {
     const {idFilme} = useParams();
     const [sessions, setSessions] = useState([])
     const [sessionData, setSessionData] = useState({})
+    
 
 
     useEffect(() => {

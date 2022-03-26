@@ -2,23 +2,57 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Footer from './Footer';
 import Seat from './Seat';
 
 import Loading from './../assets/loading.gif'
+import { cpfMask } from './../utils/mask'
 
 
 function Seats() {
 
-    const {idSessao} = useParams();
-    const [seats,setSeats] = useState({})
+    const navigate = useNavigate();
 
+    function bookSeats(e) {
+        e.preventDefault();
+
+        if(chosenSeats.length === 0) {
+            alert('Select the seats!')
+        } else {
+            const URL_RESERVATION_SEATS = "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many"
+    
+            const promise = axios.post(URL_RESERVATION_SEATS, 
+    
+                {
+                    ids: [...chosenSeats],
+                    name: inputData.name,
+                    cpf: inputData.cpf.match(/\d/g).join("") //enviar apenas números CPF
+                })
+            
+            promise.then((response) => {
+                alert("Tudo certo com o envio das informações!");
+                console.log(response)
+                navigate("/sucesso");
+            });
+    
+            promise.catch(error => alert("Erro no envio das informações"));
+
+        }
+
+    }
+
+    const {idSessao} = useParams();
+    const [seats,setSeats] = useState({});
+    const [chosenSeats, setChosenSeats] = useState([]);
+    const [inputData, setInputData] = useState({}); //{name: "", cpf: ""}
+    console.log(inputData);
+        
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
         promise.then((response) => {
             const {data} = response;
-            console.log(data)
             setSeats(data);
         });
         promise.catch((error) => {console.log(error.response);})
@@ -31,7 +65,7 @@ function Seats() {
             <SeatsScreen>
                     <h1>Selecione o(s) assento(s)</h1>
                     <div className="seats">
-                        {seats.seats.map((seat) => <Seat key={seat.id} number={seat.name} available={seat.isAvailable}/>)}
+                        {seats.seats.map((seat) => <Seat key={seat.id} id = {seat.id} number={seat.name} isAvailable={seat.isAvailable} chosenSeats={chosenSeats} setChosenSeats={setChosenSeats}/>)}
                     </div>
                     <div className="legend">
                         <div className="legend__marker">
@@ -47,15 +81,15 @@ function Seats() {
                             <p>Indisponível</p>
                         </div>         
                     </div>
-                    <Form >
+                    <Form onSubmit={bookSeats} >
                         <div className="container">
-                            <label>Nome do comprador:<input type="text" placeholder="Digite seu nome..." required></input></label>
+                            <label>Nome do comprador:<input type="text" placeholder="Digite seu nome..." required value={inputData.nome} onChange={(e) => setInputData({...inputData, name: e.target.value})}></input></label>
                         </div>
                         <div className="container">
-                        <label>CPF do comprador:<input type="text" placeholder="Digite seu CPF..." required></input></label>
+                        <label>CPF do comprador:<input type="text" placeholder="Digite seu CPF..." required value={inputData.cpf} maxLength='14' onChange={(e) => setInputData({...inputData, cpf: cpfMask(e.target.value)})}></input></label>
                         </div>
                         <div className="submit">
-                            <input type="submit" value="Reservar assento(s)"></input>
+                            <button type="submit">Reservar assento(s)</button>
                         </div>
                     </Form>
             </SeatsScreen>
@@ -183,11 +217,19 @@ const SeatsScreen = styled.div`
         padding-left: 18px;
     }
 
+    input[type=text]:focus {
+        outline: none;
+    }
+
     input[type=text]:first-child {
         margin-bottom: 7px;
     }
 
-    input::placeholder {
+    input[type=text]:focus::placeholder {
+        color: transparent;
+    }
+
+    input[type=text]::placeholder {
         font-family: 'Roboto';
         font-style: italic;
         font-weight: 400;
@@ -200,7 +242,7 @@ const SeatsScreen = styled.div`
         text-align: center;
     }
 
-    input[type=submit] {
+    button[type=submit] {
         width: 225px;
         height: 42px;
         font-family: 'Roboto';
