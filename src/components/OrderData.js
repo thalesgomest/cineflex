@@ -1,7 +1,18 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-function OrderData() {
+
+import Loading from './../assets/loading.gif';
+
+function OrderData({orderData, setOrderData}) {
+    
+
+    while (Object.keys(orderData).length === 0) {
+        return (
+            <LoadingScreen>
+                <img src={Loading} alt="loading" />
+            </LoadingScreen>
+        )}
     return (
         <OrderDataScreen>
             <div className="sucess">
@@ -9,25 +20,25 @@ function OrderData() {
             </div>
             <div className="data">
                 <p>Filme e sessão</p>
-                <p>Enola Holmes</p>
-                <p>24/06/2011 15:00</p>
+                <p>{orderData.movie}</p>
+                <p>{orderData.data} {orderData.time}</p>
             </div>
             <div className="data">
                 <p>Ingressos</p>
-                <p>Map de assentos</p>
+                {orderData.tickets.map((ticket)=> <p key={ticket}>Assento {ticket}</p>)}
             </div>
             <div className="data">
                 <p>Comprador</p>
-                <p>Nome: Thales Gomes</p>
-                <p>CPF: 105.166.146.30</p>
+                <p>Nome: {orderData.name}</p>
+                <p>CPF: {orderData.cpf}</p>
             </div>
             <div className="button_align">
                 <Link to="/">
-                    <button>Voltar pra Home(s)</button>
+                    <button onClick={() => setOrderData()}>Voltar pra Home(s)</button>
                 </Link>
             </div>
         </OrderDataScreen>
-    );
+    ) 
 }
 
 export default OrderData;
@@ -39,6 +50,7 @@ const OrderDataScreen = styled.div`
         margin: auto;
         width: 160px;
         height: 56px;
+        margin-bottom: 52px;
     }
 
     h1 {
@@ -71,7 +83,6 @@ const OrderDataScreen = styled.div`
         margin-bottom: 5px;
     }
 
-
     button {
     width: 225px;
     height: 42px;
@@ -91,6 +102,19 @@ const OrderDataScreen = styled.div`
     .button_align {
         text-align: center;
     }
+`;
 
 
-`
+const LoadingScreen = styled.div`
+
+    //centralizar loading.gif
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -100px 0 0 -100px;
+
+    img {
+    width: 200px;
+    height:200px;
+    }
+`;

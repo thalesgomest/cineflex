@@ -11,7 +11,7 @@ import Loading from './../assets/loading.gif'
 import { cpfMask } from './../utils/mask'
 
 
-function Seats() {
+function Seats({orderData, setOrderData}) {
 
     const navigate = useNavigate();
 
@@ -21,10 +21,10 @@ function Seats() {
         if(chosenSeats.length === 0) {
             alert('Select the seats!')
         } else {
+            setOrderData({movie: seats.movie.title, day: seats.day.weekday, data: seats.day.date,time: seats.name, name: inputData.name, cpf: inputData.cpf, tickets: [...numberSeat]})
             const URL_RESERVATION_SEATS = "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many"
     
             const promise = axios.post(URL_RESERVATION_SEATS, 
-    
                 {
                     ids: [...chosenSeats],
                     name: inputData.name,
@@ -32,22 +32,18 @@ function Seats() {
                 })
             
             promise.then((response) => {
-                alert("Tudo certo com o envio das informações!");
-                console.log(response)
                 navigate("/sucesso");
             });
     
             promise.catch(error => alert("Erro no envio das informações"));
-
         }
-
     }
 
     const {idSessao} = useParams();
     const [seats,setSeats] = useState({});
     const [chosenSeats, setChosenSeats] = useState([]);
+    const [numberSeat, setNumberSeat] = useState([])
     const [inputData, setInputData] = useState({}); //{name: "", cpf: ""}
-    console.log(inputData);
         
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
@@ -58,14 +54,13 @@ function Seats() {
         promise.catch((error) => {console.log(error.response);})
     },[idSessao]);
 
-    
 
     return Object.keys(seats).length !== 0 ? (
         <>
             <SeatsScreen>
                     <h1>Selecione o(s) assento(s)</h1>
                     <div className="seats">
-                        {seats.seats.map((seat) => <Seat key={seat.id} id = {seat.id} number={seat.name} isAvailable={seat.isAvailable} chosenSeats={chosenSeats} setChosenSeats={setChosenSeats}/>)}
+                        {seats.seats.map((seat) => <Seat key={seat.id} id = {seat.id} number={seat.name} isAvailable={seat.isAvailable} chosenSeats={chosenSeats} setChosenSeats={setChosenSeats} numberSeat={numberSeat} setNumberSeat={setNumberSeat}/>)}
                     </div>
                     <div className="legend">
                         <div className="legend__marker">

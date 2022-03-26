@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {useState} from 'react'
 
 
-function Seat({id, number, isAvailable, chosenSeats, setChosenSeats}) {
+function Seat({id, number, isAvailable, chosenSeats, setChosenSeats, numberSeat, setNumberSeat}) {
 
 
     const [seatSelected, setSeatSelected] = useState(false)
@@ -16,14 +16,15 @@ function Seat({id, number, isAvailable, chosenSeats, setChosenSeats}) {
             setSeatSelected(!seatSelected);
             if(!seatSelected === true && !chosenSeats.includes(id)) {
                 setChosenSeats([...chosenSeats, id])
+                setNumberSeat([...numberSeat, number])
             }
             if(!seatSelected === false && chosenSeats.includes(id)) {
                 setChosenSeats([...chosenSeats].filter((value) => value !== id))
-                }
+                setNumberSeat([...numberSeat, number].filter((value) => value !== number))
+            }
         }
     }
 
-    console.log(chosenSeats)
 
     return (
         <SeatSession className="circle" isAvailable={isAvailable} seatSelected={seatSelected} onClick={seatVerification} >

@@ -15,7 +15,6 @@ function HomePage() {
         const promise = axios.get(URL_API_MOVIES)
         promise.then((response) => {
             const {data} = response;
-            console.log(data);
             setMovies(data)
         })
         promise.catch((error) => {console.log(error.response);})

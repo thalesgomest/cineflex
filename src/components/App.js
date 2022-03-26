@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 
 import Header from "./Header";
@@ -16,7 +16,7 @@ import "./../css/style.css"
 
 function App() {
 
-    // const [orderData, setOrderData] = useState({})
+    const [orderData, setOrderData] = useState("")
 
 
     return (
@@ -25,8 +25,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />}></Route>
                 <Route path="/filme/:idFilme" element={<SessionsTimes />}></Route>
-                <Route path="/assentos/:idSessao" element={<Seats />}></Route>
-                <Route path="/sucesso" element={<OrderData />}></Route>
+                <Route path="/assentos/:idSessao" element={<Seats orderData={orderData} setOrderData={setOrderData}/>}></Route>
+                <Route path="/sucesso" element={<OrderData orderData={orderData} setOrderData={setOrderData}/>}></Route>
             </Routes>
         </BrowserRouter>
     );
