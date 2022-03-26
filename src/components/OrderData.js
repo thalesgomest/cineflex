@@ -5,15 +5,9 @@ import { Link } from 'react-router-dom';
 import Loading from './../assets/loading.gif';
 
 function OrderData({orderData, setOrderData}) {
-    
 
-    while (Object.keys(orderData).length === 0) {
-        return (
-            <LoadingScreen>
-                <img src={Loading} alt="loading" />
-            </LoadingScreen>
-        )}
-    return (
+
+    return (Object.keys(orderData).length !== 0) ? (
         <OrderDataScreen>
             <div className="sucess">
                 <h1>Pedido feito com sucesso</h1>
@@ -38,7 +32,9 @@ function OrderData({orderData, setOrderData}) {
                 </Link>
             </div>
         </OrderDataScreen>
-    ) 
+    )  : <LoadingScreen>
+            <img src={Loading} alt="loading" />
+        </LoadingScreen>
 }
 
 export default OrderData;

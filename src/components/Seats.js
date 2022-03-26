@@ -43,7 +43,7 @@ function Seats({orderData, setOrderData}) {
     const [seats,setSeats] = useState({});
     const [chosenSeats, setChosenSeats] = useState([]);
     const [numberSeat, setNumberSeat] = useState([])
-    const [inputData, setInputData] = useState({}); //{name: "", cpf: ""}
+    const [inputData, setInputData] = useState({name:"", cpf:""}); //{name: "", cpf: ""}
         
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
