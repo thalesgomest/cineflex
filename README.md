@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/97575616/160268720-067e4305-e25d-4736-8a46-36d6014d069a.png" width="600px" alt="">
+  <img src="https://user-images.githubusercontent.com/97575616/160268720-067e4305-e25d-4736-8a46-36d6014d069a.png" width="100%" alt="">
 </p>
 
 <h1 align="center">Cineflex</h1>
