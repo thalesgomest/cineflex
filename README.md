@@ -1,6 +1,7 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/97575616/160268720-067e4305-e25d-4736-8a46-36d6014d069a.png" width="100%" alt="">
+  <img src="https://user-images.githubusercontent.com/97575616/161797181-f8e31be0-466d-496a-91a9-48ffa4dbe009.png" width="400px" alt="">
 </p>
+
 
 <h1 align="center">Cineflex</h1>
  
