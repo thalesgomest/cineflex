@@ -30,7 +30,7 @@
 ![status-finished](https://user-images.githubusercontent.com/97575616/152926720-d042178b-24c0-4d6b-94fb-0ccbd3c082cc.svg)
 <!-- ![status-in-progress](https://user-images.githubusercontent.com/97575616/153774620-d6a0a615-9d38-4402-ae72-20c52f8bbd5c.svg) -->
 
-### How to run
+## How to run
 
 1. Clone this repository
 2. Install dependencies
