@@ -29,33 +29,24 @@
 <!-- ![status](https://img.shields.io/badge/Status-Progress-FFE70C?style=plastic) -->
 
 ## ⚙️ How to run
-
-Clone this repository<br>
-
-<p>
-Install dependencies
-
 ```bash
-npm i
-```
+# Clone this repoository
+$ git clone https://github.com/thalesgomest/cineflex.git
 
-Run the project with
+# Change to project directory
+$ cd cineflex
 
-```bash
-npm start
-```
+# Install all dependencies
+$ npm i
 
-You can optionally build the project running
+# Run the project with
+$ npm start
 
-```bash
-npm run build
-```
+# You can optionally build the project running
+$ npm run build
 
-Finally
-
-```
-access http://localhost:3000 on your favorite browser
-
+# Finally
+$ The server will start on port:3000. Access http://localhost:3000 on your favorite browser
 ```
 
 ## 🛠️ Build with
