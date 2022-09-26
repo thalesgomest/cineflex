@@ -17,7 +17,7 @@
 
 ## 📸 Mockup
 
-![image](https://user-images.githubusercontent.com/97575616/192391480-dcde48fa-3847-47c2-8c39-1f43a1926bd3.png)
+<img src="https://user-images.githubusercontent.com/97575616/192391480-dcde48fa-3847-47c2-8c39-1f43a1926bd3.png" width="100%" alt="mockup">
 
 ## 🚧 Status of work
 
