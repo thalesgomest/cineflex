@@ -63,7 +63,7 @@ access http://localhost:3000 on your favorite browser
 ![uses-html5](https://img.shields.io/badge/HTML5-E34F26?style=plastic&logo=html5&logoColor=white)
 ![uses-css](https://img.shields.io/badge/CSS3-1572B6?style=plastic&logo=css3&logoColor=white)
 ![built-with-git](https://img.shields.io/badge/Git-E34F26?style=plastic&logo=git&logoColor=white)
-![built-with-vsc](https://img.shields.io/badge/VISUAL%20STUDIO%20CODE-blue?style=plastic&logo=visualstudiocode)
+![built-with-vsc](https://img.shields.io/badge/Visual%20Studio%20Code-blue?style=plastic&logo=visualstudiocode)
 
 ## 📫 Contact
 
